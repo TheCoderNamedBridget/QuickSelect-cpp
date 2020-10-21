@@ -1,16 +1,34 @@
 /******************************************************************************
 
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
-
+Bridget Naylor
+Date: 10/21/2020
+CECS 328 Section 7
+Lab 3 Quick Select 
 *******************************************************************************/
 #include <stdio.h>
+#include <iostream>
+using namespace std;
 
 int main()
 {
-    printf("Hello World");
+    int n;
+    cout<<"Enter a pos num: ";
+    cin>>n;
+    if ( k < n )
+    {
+        cout<<"Bad number selected"<<endl;
+    }
+    int a[n];
+    //generate random numbers between -100 to 100 and save to an array a
+    
+    int k;
+    cout<<"Enter a num between 1 and "<<n;
+    cin>>k;
+    if ( k < 1 || k > n )
+    {
+        cout<<"Bad number selected"<<endl;
+    }
+    //call quickselect and print the kth least element
 
     return 0;
 }
