@@ -108,7 +108,7 @@ void partition( int a[], int size)
     }
 }
 
-int quickSelect( int array[], int size)
+int quickSelect( int array[], int s, int e, int n)
 {
     
     return -666;
@@ -157,6 +157,7 @@ int main()
     }
     
     partition( a, size );
+    cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k );
    
     return 0;
 }
