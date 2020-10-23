@@ -106,21 +106,33 @@ void partition( int a[], int size)
     {
         cout<<"in partition "<<a[i]<<endl;
     }
+}
+
+int quickSelect( int array[], int size)
+{
     
+    return -666;
 }
 
 
 int main()
 {
     int size = 0;
+    int k = 0;
     while ( size < 1)
     {
         cout<<"Enter a positive non zero integer: ";
         cin >> size;
     }
+    
     int a[size];
-    //gen random numbers between -100 - 100
-    //add to array and print array
+    
+    while ( k < 1 || k > size )
+    {
+        cout<<"Enter a number between 1 and "<<size<<" ";
+        cin>>k;
+    }
+    
     srand (time(NULL));
     for ( int i = 0; i < size; i++ )
     {
