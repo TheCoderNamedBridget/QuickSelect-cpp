@@ -9,7 +9,7 @@ Lab 3 Quick Select
 #include <stdlib.h>     /* srand, rand */
 #include <iostream>
 using namespace std;
-
+//Part A
 //returns index of the partition value
 int partition( int a[], int start, int end)
 {
@@ -98,35 +98,75 @@ int partition( int a[], int start, int end)
     return midIndex;
 }
 
-
 int quickSelect( int a[], int s, int e, int k)
 {
     int n = e + 1;//size
     int pivIndex = partition( a, s, e );
-    cout<<"Partition piv index = "<<pivIndex<<" Value = "<<a[pivIndex]<<endl;
-    cout<<"s "<<s<<" e "<<e<<endl;
-    cout<<"s == e "<<(s == e)<<endl;
-    cout<<"k "<<k<<" pivot index "<< (pivIndex + 1)<<endl;
+    // cout<<"Partition piv index = "<<pivIndex<<" Value = "<<a[pivIndex]<<endl;
+    // cout<<"s "<<s<<" e "<<e<<endl;
+    // cout<<"s == e "<<(s == e)<<endl;
+    // cout<<"k "<<k<<" pivot index "<< (pivIndex + 1)<<endl;
     if ( k - 1 == pivIndex -s)
     {
-        cout<<"basecase "<<endl;
+        //cout<<"basecase "<<endl;
         return a[pivIndex];
     }
     else if ( pivIndex - s > k - 1 )//k is to right of piv index
     {
         
-        cout<<"rightcase "<<endl;
+        //cout<<"rightcase "<<endl;
         return quickSelect( a, s, pivIndex - 1, k );
     }
-    cout<<"leftcase "<<endl;
+    //cout<<"leftcase "<<endl;
     return quickSelect( a, pivIndex + 1, e, k - pivIndex + s - 1 );
     
     
 }
 
+//Part B
+int quickSelectIndexReturn( int a[], int s, int e, int k)
+{
+    int n = e + 1;//size
+    int pivIndex = partition( a, s, e );
+    // cout<<"Partition piv index = "<<pivIndex<<" Value = "<<a[pivIndex]<<endl;
+    // cout<<"s "<<s<<" e "<<e<<endl;
+    // cout<<"s == e "<<(s == e)<<endl;
+    // cout<<"k "<<k<<" pivot index "<< (pivIndex + 1)<<endl;
+    if ( k - 1 == pivIndex -s)
+    {
+        cout<<"basecase "<<endl;
+        cout<<"pivIndex"<<pivIndex<<endl;
+        return pivIndex;
+    }
+    else if ( pivIndex - s > k - 1 )//k is to right of piv index
+    {
+        
+        //cout<<"rightcase "<<endl;
+        return quickSelectIndexReturn( a, s, pivIndex - 1, k );
+    }
+    //cout<<"leftcase "<<endl;
+    return quickSelectIndexReturn( a, pivIndex + 1, e, k - pivIndex + s - 1 );
+    
+    
+}
+
+void maxNums( int a[], int numLarge, int size )
+{
+    
+    int index = size - numLarge;
+    int pivIndex = quickSelectIndexReturn( a, 0, size - 1, index );
+    cout<<"pivIndex"<<pivIndex<<" Largest Numbers: "<<endl;
+    for ( int i = pivIndex + 1; i < size; i ++ )
+    {
+        cout<<"In "<<a[i]<<endl;
+    }
+}
+
+
 
 int main()
 {
+    //PART A
     int size = 0;
     int k = 0;
     while ( size < 1)
@@ -166,8 +206,16 @@ int main()
         cout<<"a[j] in main "<<a[j]<<endl;
     }
     
-    cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k);
-   
+    //cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k)<<endl;
+    
+    //Part B
+    int numLarge = 0;
+    while ( numLarge < 1 )
+    {
+        cout<<"Enter desired number of largest elements: ";
+        cin>>numLarge;
+    }
+    maxNums( a, numLarge, size );
     return 0;
 }
 
