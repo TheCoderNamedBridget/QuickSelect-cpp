@@ -11,7 +11,7 @@ Lab 3 Quick Select
 using namespace std;
 
 //returns index of the partition value
-int partition( int a[], int size)
+int partition( int a[], int start, int end, int size)
 {
     int pivIndex = 0;
     int midIndex = (size - 1)/2;
@@ -30,10 +30,10 @@ int partition( int a[], int size)
     // }
     // cout<<"left INDEX "<<leftPivIndex<<endl;
     // cout<<"right INDEX "<<rightPivIndex<<endl;
-    for ( int k = 0; k < size; k ++ )
+    for ( int k = start; k < end; k ++ )
     {
         //cout<<"Herefor"<<endl;
-        if ( leftPivIndex < 0 )
+        if ( leftPivIndex < start )
         {
             //cout<<"Hereleft"<<endl;
             //do stuff for left side
@@ -41,7 +41,7 @@ int partition( int a[], int size)
         }
         //cout<<"rightPivIndex "<<rightPivIndex<<endl;
         //cout<<"leftPivIndex "<<leftPivIndex<<endl;
-        if ( rightPivIndex > size - 1 )
+        if ( rightPivIndex > end  )
         {
             //cout<<"Hereright"<<endl;
             //do stuff for left side
@@ -56,7 +56,9 @@ int partition( int a[], int size)
         }
         else if ( goRight && (a[rightPivIndex] < piv) )//only switch right
         {
-            //cout<<"right switch"<<endl;
+            cout<<"right switch"<<endl;
+            cout<<"piv index "<<midIndex<<" piv value "<<piv<<endl;
+            cout<<"element index "<<midIndex + 1<<" element value "<<a[midIndex + 1]<<endl;
             //switches element to right of piv with other right element < piv
             int pivPlusOne = a[midIndex + 1];
             a[midIndex + 1] = a[rightPivIndex];
@@ -85,12 +87,15 @@ int partition( int a[], int size)
             
             midIndex--;
         }
-        
+        cout<<"11piv index "<<midIndex<<" piv value "<<piv<<endl;
+        cout<<"11element index "<<midIndex + 1<<" element value "<<a[midIndex + 1]<<endl;
+        cout<<"goRight"<<goRight<<endl;
+        cout<<"(a[rightPivIndex] < piv) "<<(a[rightPivIndex] < piv)<<endl;
         leftPivIndex --;
         rightPivIndex ++;
     }
     
-    for ( int i = 0; i < size; i++)
+    for ( int i = start; i < end + 1; i++)
     {
         cout<<"in partition "<<a[i]<<endl;
     }
@@ -100,23 +105,28 @@ int partition( int a[], int size)
 //TESTING for QuickSelect
 //base case k = pivIndex + 1
 //k > pivIndex + 1
+//int a[] = { 1, 2, 5, 6, 7, 8, 1};
+//cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k, size );
 //k < pivIndex + 1
-int quickSelect( int a[], int s, int e, int k )
+//int a[] = { 10, 2, 5, 6, 7, 8, 1};
+//cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k, size );
+int quickSelect( int a[], int s, int e, int k, int size )
 {
     int n = e + 1;//size
-    int pivIndex = partition( a, n );
+    int pivIndex = partition( a, s, e, size );
     cout<<"Partition piv index = "<<pivIndex<<" Value = "<<a[pivIndex]<<endl;
+    cout<<"s "<<s<<" e "<<e<<endl;
     if ( k == pivIndex + 1 )
     {
         return a[pivIndex];
     }
     else if ( k > pivIndex + 1 )//k is to right of piv index
     {
-        quickSelect( a, pivIndex, e, k );
+        quickSelect( a, pivIndex + 1, e, k, size );
     }
     else if ( k < pivIndex + 1 )//k is to left of piv index
     {
-        quickSelect( a, s, pivIndex, k );
+        quickSelect( a, s, pivIndex - 1, k, size );
     }
     
     return -666;
@@ -163,9 +173,9 @@ int main()
     {
         cout<<"a[j] in main "<<a[j]<<endl;
     }
-    
-    //partition( a, size );
-    cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k );
+
+    partition( a, 0, 10 - 1, 10 );
+    // cout<<"QuickSelect: "<<quickSelect( a, 0, size - 1, k, size );
    
     return 0;
 }
